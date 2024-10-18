@@ -1,0 +1,35 @@
+syntax = "proto3";
+package coffeeshop;
+
+option go_package = "github.com/Hosea-kibet/GRPC_EXAMPLE";
+
+service CoffeeShop {
+    rpc GetMenu(MenuRequest) returns (stream Menu) {}
+    rpc PlaceOrder(Order) returns (Receipt) {}
+    rpc OrderStatus(Receipt) returns (OrderStatusResponse) {}
+}
+
+message MenuRequest {}
+
+message Order {
+    //repeated indicates that we are working with lists
+    repeated Item items = 1;
+}
+
+message Receipt {
+    string id = 1;
+}
+
+message OrderStatusResponse {
+    string OrderId = 1;
+    string Status = 2;
+}
+
+message Menu {
+    repeated Item items = 1;
+}
+
+message Item {
+    string Id = 1;
+    string Name = 2;
+}
